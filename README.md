@@ -1,4 +1,4 @@
-# Sinatra Activerecord Setup
+<!-- # Sinatra Activerecord Setup
 
 
 ## Objectives
@@ -45,9 +45,9 @@ Into our development group, we'll add two other gems: `sqlite3` and `tux`. `sqli
 	end
 ```
 
-Our Gemfile is up to date - awesome! Go ahead and run `bundle install` to get your system up to speed.
+Our Gemfile is up to date - awesome! Go ahead and run `bundle install` to get your system up to speed. -->
 
-### Connecting to the Database
+<!-- ### Connecting to the Database
 
 We now have access to all of the gems that we need, but we still need to set up a connection to our database. Add the following block of code to your `environment.rb` file (underneath `Bundler.require(:default, ENV['SINATRA_ENV'])`).
 
@@ -63,21 +63,21 @@ This sets up a connection to a sqlite3 database named "database.db", located in 
 configure :development do
   set :database, 'sqlite3:db/dogs.db'
 end
-```
+``` -->
 
-But for now, `database.db` is a great name. Notice that this didn't actually create those files or folders yet - that's how Rake will help us.
+<!-- But for now, `database.db` is a great name. Notice that this didn't actually create those files or folders yet - that's how Rake will help us. -->
 
 ### Making a Rakefile
+<!-- 
+As we mentioned, `rake` gives us the ability to quickly make files and set up automated tasks. We define these in a file called `Rakefile`. First, create a `Rakefile` in the root of our project directory. In the `Rakefile`, we'll require our `config/environment.rb` file to load up our environment, as well as `"sinatra/activerecord/rake"` to get Rake tasks from the `sinatra-activerecord` gem. -->
 
-As we mentioned, `rake` gives us the ability to quickly make files and set up automated tasks. We define these in a file called `Rakefile`. First, create a `Rakefile` in the root of our project directory. In the `Rakefile`, we'll require our `config/environment.rb` file to load up our environment, as well as `"sinatra/activerecord/rake"` to get Rake tasks from the `sinatra-activerecord` gem.
-
-```ruby
+<!-- ```ruby
 require './config/environment'
-require 'sinatra/activerecord/rake'
-```
+require 'sinatra/activerecord/rake' -->
+
 
 In the terminal, type `rake -T` to view all of the available rake tasks. You should see the following output:
-
+<!-- 
 ```bash
 rake db:create              # Creates the database from DATABASE_URL or config/database.yml for...
 rake db:create_migration    # Create a migration (parameters: NAME, VERSION)
@@ -95,9 +95,9 @@ rake db:setup               # Create the database, load the schema, and initiali
 rake db:structure:dump      # Dump the database structure to db/structure.sql
 rake db:structure:load      # Recreate the databases from the structure.sql file
 rake db:version             # Retrieves the current schema version number
-```
+``` -->
 
-### Testing it Out
+<!-- ### Testing it Out
 
 Let's test out our handiwork by creating a `dogs` table with two columns: `name` and `breed`. First, let's create our migration:
 
@@ -107,8 +107,8 @@ rake db:create_migration NAME=create_dogs
 You should see the following output:
 
 ```bash
-=># db/migrate/20150914201353_create_dogs.rb
-```
+=># db/migrate/20150914201353_create_dogs.rb -->
+<!-- ```
  The beginning of the file is a timestamp - yours should reflect the time that your `create_dogs` file was created! You've now created your first database migration inside of the `db` folder.
 
 Inside of the migration file, remove the default `change` method (we'll come back to this), and add methods for `up` and `down`.
@@ -155,8 +155,8 @@ You should see the following output:
 -- create_table(:dogs)
    -> 0.0019s
 == 20150914201353 CreateDogs: migrated (0.0020s) ==============================
-```
-
+``` -->
+<!-- 
 #### The `change` Method
 The change method is actually a shorter way of writing `up` and `down` methods. We can refactor our migration to look like this:
 
@@ -169,7 +169,7 @@ class CreateDogs < ActiveRecord::Migration
     end
   end
 
-end
+end -->
 ```
 While the rollback (`down`) method is not included, it's implicit in the change method. Rolling back the database would work in exactly the same way as using the `down` method.
 
